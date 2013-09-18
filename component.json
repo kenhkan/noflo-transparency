@@ -1,0 +1,24 @@
+{
+  "name": "noflo-transparency",
+  "description": "Wrapper around Transparency template engine",
+  "author": "Kenneth Kan <kenhkan@gmail.com>",
+  "repo": "kenhkan/transparency",
+  "version": "0.0.0",
+  "keywords": [
+  ],
+  "dependencies": {
+    "noflo/noflo": "*"
+  },
+  "scripts": [
+    "components/DoSomething.coffee",
+    "index.js"
+  ],
+  "json": [
+    "component.json"
+  ],
+  "noflo": {
+    "components": {
+      "DoSomething": "components/DoSomething.coffee"
+    }
+  }
+}
