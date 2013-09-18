@@ -17,7 +17,9 @@
     }
   ],
   "dependencies": {
-    "noflo": "~0.4.0"
+    "noflo": "~0.4.0",
+    "transparency": "~0.9.14",
+    "jsdom": "~0.8.4"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

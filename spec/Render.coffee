@@ -1,16 +1,16 @@
 noflo = require 'noflo'
 unless noflo.isBrowser()
   chai = require 'chai' unless chai
-  DoSomething = require '../components/DoSomething.coffee'
+  Render = require '../components/Render.coffee'
 else
-  DoSomething = require 'test/components/DoSomething.js'
+  Render = require 'test/components/Render.js'
 
-describe 'DoSomething component', ->
+describe 'Render component', ->
   c = null
   ins = null
   out = null
   beforeEach ->
-    c = DoSomething.getComponent()
+    c = Render.getComponent()
     ins = noflo.internalSocket.createSocket()
     out = noflo.internalSocket.createSocket()
     c.inPorts.in.attach ins

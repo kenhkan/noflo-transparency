@@ -10,7 +10,7 @@
     "noflo/noflo": "*"
   },
   "scripts": [
-    "components/DoSomething.coffee",
+    "components/Render.coffee",
     "index.js"
   ],
   "json": [
@@ -18,7 +18,7 @@
   ],
   "noflo": {
     "components": {
-      "DoSomething": "components/DoSomething.coffee"
+      "Render": "components/Render.coffee"
     }
   }
 }
