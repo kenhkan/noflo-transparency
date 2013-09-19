@@ -19,7 +19,8 @@
   "dependencies": {
     "noflo": "~0.4.0",
     "transparency": "~0.9.14",
-    "jsdom": "~0.8.4"
+    "jsdom": "~0.8.4",
+    "underscore.string": "~2.3.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -36,5 +37,12 @@
     "grunt-combine": "~0.8.3",
     "grunt-component": "~0.1.2"
   },
-  "keywords": ["noflo", "template", "engine"]
+  "keywords": [
+    "noflo",
+    "template",
+    "engine"
+  ],
+  "scripts": {
+    "test": "grunt test"
+  }
 }
