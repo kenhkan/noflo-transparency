@@ -14,10 +14,12 @@ describe 'Render component', ->
     globals.c = Render.getComponent()
     globals.ins = noflo.internalSocket.createSocket()
     globals.template = noflo.internalSocket.createSocket()
+    globals.enclosing = noflo.internalSocket.createSocket()
     globals.root= noflo.internalSocket.createSocket()
     globals.out = noflo.internalSocket.createSocket()
     globals.c.inPorts.in.attach globals.ins
     globals.c.inPorts.template.attach globals.template
+    globals.c.inPorts.enclosing.attach globals.enclosing
     globals.c.inPorts.root.attach globals.root
     globals.c.outPorts.out.attach globals.out
 
@@ -297,4 +299,66 @@ describe 'Render component', ->
       globals.ins.beginGroup 'target'
       globals.ins.send bindings
       globals.ins.endGroup 'target'
+      globals.ins.disconnect()
+
+    it 'also wraps when groups are passed to TEMPLATE', (done) ->
+      template = '''
+        <html>
+          <body>
+            <div id="root">
+              <div>
+                <div class="target">
+                  <div>
+                    <div class="name"></div>
+                    <div class="gender"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        </html>
+      '''
+      output = '''
+        <div id="root">
+          <div>
+            <div class="target">
+              <div>
+                <div class="name">Ken</div>
+                <div class="gender">m</div>
+              </div>
+              <div>
+                <div class="name">Jen</div>
+                <div class="gender">f</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      '''
+      bindings = [
+        {
+          name: 'Ken'
+          gender: 'm'
+        }
+        {
+          name: 'Jen'
+          gender: 'f'
+        }
+      ]
+
+      globals.out.on 'data', (data) ->
+        chai.expect(_str.clean data).to.equal _str.clean output
+
+      globals.out.on 'disconnect', ->
+        done()
+
+      globals.root.send '#root'
+      globals.root.disconnect()
+
+      globals.enclosing.send 'target'
+      globals.enclosing.disconnect()
+
+      globals.template.send template
+      globals.template.disconnect()
+
+      globals.ins.send bindings
       globals.ins.disconnect()
