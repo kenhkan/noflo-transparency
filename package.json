@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/kenhkan/noflo-transparency"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": ""
+      "url": "https://github.com/kenhkan/noflo-transparency/blob/master/LICENSE.md"
     }
   ],
   "dependencies": {
@@ -36,5 +36,5 @@
     "grunt-combine": "~0.8.3",
     "grunt-component": "~0.1.2"
   },
-  "keywords": []
+  "keywords": ["noflo", "template", "engine"]
 }

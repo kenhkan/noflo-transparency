@@ -4,7 +4,7 @@ Wrapper around [Transparency](http://leonidas.github.io/transparency/) the templ
 
 ## Usage
 
-* transparency/Render
+* [transparency/Render](#render)
 
 ### Render
 
