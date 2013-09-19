@@ -44,5 +44,10 @@
   ],
   "scripts": {
     "test": "grunt test"
+  },
+  "noflo": {
+    "components": {
+      "Render": "./components/Render.coffee"
+    }
   }
 }

@@ -6,6 +6,7 @@ class Render extends noflo.Component
   constructor: ->
     @template = ''
     @rootSelector = 'html'
+    @enclosing = null
 
     @inPorts =
       in: new noflo.Port 'object'
@@ -17,9 +18,24 @@ class Render extends noflo.Component
     @inPorts.template.on 'data', (@template) =>
     @inPorts.root.on 'data', (@rootSelector) =>
 
+    @inPorts.in.on 'begingroup', (@enclosing) =>
+    @inPorts.in.on 'endgroup', =>
+      @enclosing = null
+
     @inPorts.in.on 'data', (data) =>
+      # Create root node from jsdom
       root = jsdom.jsdom(@template).querySelector(@rootSelector)
-      output = transparency.render(root, data).outerHTML
+
+      # Enclose with a group if provided. This is for specifying where to start
+      # iterating.
+      if @enclosing?
+        bindings = {}
+        bindings[@enclosing] = data
+      else
+        bindings = data
+
+      # Apply template
+      output = transparency.render(root, bindings).outerHTML
 
       @outPorts.out.send output
 

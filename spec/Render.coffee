@@ -223,9 +223,6 @@ describe 'Render component', ->
       ]
 
       globals.out.on 'data', (data) ->
-        console.log '*** BBB'
-        console.log data
-        console.log output
         chai.expect(_str.clean data).to.equal _str.clean output
 
       globals.out.on 'disconnect', ->
@@ -238,4 +235,66 @@ describe 'Render component', ->
       globals.template.disconnect()
 
       globals.ins.send bindings
+      globals.ins.disconnect()
+
+  describe 'groups', ->
+    it 'wraps data IPs in an object as value with incoming group as the key', (done) ->
+      template = '''
+        <html>
+          <body>
+            <div id="root">
+              <div>
+                <div class="target">
+                  <div>
+                    <div class="name"></div>
+                    <div class="gender"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        </html>
+      '''
+      output = '''
+        <div id="root">
+          <div>
+            <div class="target">
+              <div>
+                <div class="name">Ken</div>
+                <div class="gender">m</div>
+              </div>
+              <div>
+                <div class="name">Jen</div>
+                <div class="gender">f</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      '''
+      bindings = [
+        {
+          name: 'Ken'
+          gender: 'm'
+        }
+        {
+          name: 'Jen'
+          gender: 'f'
+        }
+      ]
+
+      globals.out.on 'data', (data) ->
+        chai.expect(_str.clean data).to.equal _str.clean output
+
+      globals.out.on 'disconnect', ->
+        done()
+
+      globals.root.send '#root'
+      globals.root.disconnect()
+
+      globals.template.send template
+      globals.template.disconnect()
+
+      globals.ins.beginGroup 'target'
+      globals.ins.send bindings
+      globals.ins.endGroup 'target'
       globals.ins.disconnect()
