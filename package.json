@@ -1,7 +1,7 @@
 {
   "name": "noflo-transparency",
   "description": "Wrapper around Transparency template engine",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "Kenneth Kan",
     "email": "kenhkan@gmail.com"
