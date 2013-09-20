@@ -39,8 +39,6 @@ class Render extends noflo.Component
       else
         bindings = data
 
-      console.log "*** AAA: #{enclosing} | #{@enclosing} | #{@enclosingAll}"
-      console.log bindings
       # Apply template
       output = transparency.render(root, bindings).outerHTML
 
